@@ -183,7 +183,7 @@ webdsl run
 
 <img src="images/hello-world.jpg"/>
 
-* Press Ctrl+C in your running command prompt to stop your local web server
+* Press Ctrl+C in your running command prompt to stop your local web server. Note that in our tests on Windows this did not stop the Tomcat Java executable when terminating in cmd. Use before running `webdsl run` again: `taskkill /f /im java.exe` (note: it should not kill eclipse, but might kill other Java processes).
 
 # 7. Recommended: Using MySQL database
 
