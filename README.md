@@ -2,6 +2,19 @@
 
 The WebDSL editor and compiler both need a JDK version >= 8 to function properly. Following these steps will make sure WebDSL functions properly, but feel free to experiment with your own setup.
 
+## Linux and MacOS
+
+* Use your package manager (e.g. `apt-get` on Ubuntu and `brew` on MacOS) to install OpenJDK. Alternatively you can also install OracleJDK with the installer from the Oracle website.
+
+* Check that Java is installed correctly:
+
+```bash
+java -version
+javac -version
+```
+
+## Windows
+
 * Download the OpenJDK 8 zip file from [the OpenLogic website](https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=416&field_operating_system_target_id=436&field_architecture_target_id=391&field_java_package_target_id=396)
 * Extract `openjdk-8u272-b10.zip` to a directory you like
 * Set your `JAVA_HOME` directory by doing the following:
@@ -47,6 +60,20 @@ javac -version
 
 The WebDSL Compiler uses Apache Ant as a command-line tool to help build applications. If Ant is not installed on your system, follow these steps.
 
+## Linux and MacOS
+
+* Use your package manager (e.g. apt-get on Ubuntu and brew on MacOS) to install `ant`.
+* Test by running the `ant` command:
+
+```bash
+ant
+# should return:
+# Buildfile: build.xml does not exist!
+# Build failed
+```
+
+## Windows
+
 * Download Apache Ant version 1.10.9 from [their download page](http://ant.apache.org/bindownload.cgi)
 * Extract `apache-ant-1.10.9-bin.zip` in a folder you like
 * Add the `ANT_HOME` as system environment variable:
@@ -84,6 +111,33 @@ Now that all the prerequisites are met, let's install the WebDSL compiler. The c
 <img src="images/webdsl-compiler-build-server.jpg" width="500"/>
 
 * Extract `webdsl.zip` in a folder you like
+
+## Linux and MacOS
+
+Add the `webdsl/bin` directory to your path environment variable.
+
+* Confirm that the WebDSL compiler is installed correctly by opening a new command prompt window and executing the following command
+```bash
+webdsl version
+# If the WebDSL compiler is installed successfully, the output ends with the following:
+# ...
+# command0: version
+#
+# Invoking WebDSL compiler
+#
+# webdsl arguments: --version
+# Directory: <your pwd here>
+# Java options: -Xmx2G -Xss12m
+# Classpath: <your webdsl bin directory>\webdsl.jar, strategoxt.jar
+# WebDSL version: 0b580cfb3a8623453bb2d54d1bcb06bf3c964977
+# FINISHED TASKS: `version` at XXXX-XX-XX XX:XX:XX
+#
+# BUILD SUCCESSFUL
+# Total time: 3 seconds
+```
+
+## Windows
+
 * Add `<Folder you extracted to>\webdsl\bin` to your path variable:
   * Open your Windows environment variable settings
   * Press "Environment Variables"
@@ -116,7 +170,7 @@ webdsl version
 
 In addition to the WebDSL compiler, the WebDSL editor is an eclipse plugin that provides an IDE for WebDSL applications. If you wish to use your existing Eclipse instance, you can install the WebDSL plugin manually from update site `https://webdsl.org/update`. If you do not already have Eclipse installed, or prefer to use a new Eclipse instance as WebDSL editor, follow these instructions. 
 
-* Download `eclipse-windows-x64.zip` from the [build server](https://buildfarm.metaborg.org/view/WebDSL/job/webdsl-eclipsegen/lastSuccessfulBuild/artifact/dist/eclipse/)
+* Download `eclipse-windows-x64.zip` from the [build server](https://buildfarm.metaborg.org/view/WebDSL/job/webdsl-eclipsegen/lastSuccessfulBuild/artifact/dist/eclipse/)  (note: there are separate versions for Linux and MacOS)
 
 <img src="images/webdsl-editor-build-server.jpg" width="500"/>
 
