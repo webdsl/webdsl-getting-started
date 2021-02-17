@@ -256,7 +256,7 @@ page root {
     input( newitem.text )
     submit action{ newitem.save(); }{ "Add text" }
   }
-  div{
+  div {
     output( (from Item).length )
   }
   for( i: Item ){
@@ -400,3 +400,17 @@ mysql> quit;
 ```
 
 * Your WebDSL Hello World application is now succesfully using your local MySQL server to store data
+
+# 8. Optional: Dark mode editor
+
+Altough the editor color scheme is not configurable in the underlying system, we created a separate update site with dark mode friendly colors
+
+* Go to eclipse `Help -> Install New Software...`
+use the following update site url
+https://webdsl.org/update-dark
+* Additionally, to make the rest of eclipse dark go to eclipse `Help -> Eclipse Marketplace...`
+  search and install `Darkest Dark Theme with DevStyle`
+
+Screenshot:
+
+<img src="images/dark-mode-editor.png" width="300px;"/>
