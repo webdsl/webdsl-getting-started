@@ -239,6 +239,39 @@ webdsl run
 
 * Press Ctrl+C in your running command prompt to stop your local web server. Note that in our tests on Windows this did not stop the Tomcat Java executable when terminating in cmd. Use before running `webdsl run` again: `taskkill /f /im java.exe` (note: it should not kill eclipse, but might kill other Java processes).
 
+## Update application and redeploy
+
+Make some changes to the application and run `webdsl run` again to check that the new code is being deployed. New application code:
+
+```
+application HelloWorld
+
+entity Item {
+  text : WikiText
+}
+
+page root {
+  var newitem := Item{}
+  form {
+    input( newitem.text )
+    submit action{ newitem.save(); }{ "Add text" }
+  }
+  div{
+    output( (from Item).length )
+  }
+  for( i: Item ){
+    div {
+      output( i.text )
+      submit action{ i.delete(); }{ "Remove" }
+    }
+  }
+}
+```
+
+Note that the WikiText type supports Markdown in the output:
+
+<img src="images/new-app-code-test.png" width="250"/>
+
 # 7. Recommended: Using MySQL database
 
 The default configuration of a WebDSL application is to use an H2 database. However, when working on applications for an extended amount of time, we recommend using a MySQL database. The use of MySQL versions above 5.7 is not thoroughly tested, therefore we recommend using a version <= 5.7.
