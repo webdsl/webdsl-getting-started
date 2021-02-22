@@ -451,3 +451,30 @@ https://webdsl.org/update-dark
 Screenshot:
 
 <img src="images/dark-mode-editor.png" width="300px;"/>
+
+# Troubleshooting
+
+In this section, possible solutions to frequently reported issues are listed.
+
+## Connections could not be acquired from the underlying database!
+
+<img src="images/connections-could-not-be-acquired.jpg" width="500" />
+
+When the terminal where you executed `webdsl run` gives this error, WebDSL cannot reach the database specified in the `application.ini` in the root directory of your project.
+
+* If your `application.ini` uses `db=h2`:
+  - Stop your local webserver.
+  - Change `db=h2` to `db=h2mem` and `dbmode=update` to `dbmode=create-drop` in your `application.ini`.
+  - (For Windows users: execute `taskkill /f /im java.exe` in your command prompt)
+  - Execute `webdsl run` again.
+* If your `application.ini` uses a MySQL configuration:
+  - Make sure all of the following values are set: `dbserver`, `dbuser`, `dbpassword`, `dbname` and there is no trailing whitespace.
+  - In your terminal, make sure you can connect to your database using the following command: `mysql <dbname> -h localhost -u <dbuser> -p` and enter the password value specified in your `application.ini`
+  - 
+
+## Port 3306 is already in use when attempting to run your docker container
+
+* Remove the original docker container by executing `docker rm webdsl_mysql`. Make sure it is removed correctly by checking it is not in the list produced by `docker ps -a`
+* Execute an altered version of the `docker run` command where the new MySQL port is 3307: `docker run --name webdsl_mysql -p 3307:3306 -e MYSQL_DATABASE=webdsldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=password -e MYSQL_ALLOW_EMPTY_PASSWORD=true -d mysql:5.7`
+* When connection to your database using the terminal, specify the port as follows: `mysql <dbname> -h localhost -P 3307 -u <dbuser> -p` and enter the password value specified in `dbpassword` in your `application.ini`.
+* change `dbserver=localhost` to `dbserver=localhost:3307` in your `application.ini`.
