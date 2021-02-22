@@ -333,7 +333,7 @@ docker ps
 * Execute the following commands
 
 ```bash
-mysql -u root
+mysql -u mysql -p
 # should give some basic information about your local server and end with
 # ...
 # mysql>
@@ -343,38 +343,21 @@ mysql> show databases;
 # | Database           |
 # +--------------------+
 # | information_schema |
-# | mysql              |
-# | performance_schema |
-# | sys                |
+# | webdsldb           |
 # +--------------------+
 # 4 rows in set (0.00 sec)
-
-mysql> create database helloworld;
-# Query OK, 1 row affected (0.00 sec)
-
-mysql> show databases;
-# +--------------------+
-# | Database           |
-# +--------------------+
-# | information_schema |
-# | helloworld         |
-# | mysql              |
-# | performance_schema |
-# | sys                |
-# +--------------------+
-# 5 rows in set (0.00 sec)
 ```
 
 * Run your WebDSL application as described in section 6
 * After visiting `localhost:8080/HelloWorld` at least once, your mysql database should be initialized with the application's tables
 
 ```bash
-mysql> use helloworld;
+mysql> use webdsldb;
 # Database changed
 
 mysql> show tables;
 # +------------------------------------------------------------+
-# | Tables_in_helloworld                                       |
+# | Tables_in_webdsldb                                         |
 # +------------------------------------------------------------+
 # | _dummy_webdsl_entity                                       |
 # | _queuedemail                                               |
@@ -437,6 +420,43 @@ mysqld --install
 * Right-click the MySQL service
 * Press "Start"
 * Your MySQL database is now running
+* Create your database by executing the following commands.
+
+```bash
+mysql -u root
+# should give some basic information about your local server and end with
+# ...
+# mysql>
+
+mysql> show databases;
+# +--------------------+
+# | Database           |
+# +--------------------+
+# | information_schema |
+# | mysql              |
+# | performance_schema |
+# | sys                |
+# +--------------------+
+# 4 rows in set (0.00 sec)
+
+mysql> create database webdsldb;
+# Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
+# +--------------------+
+# | Database           |
+# +--------------------+
+# | information_schema |
+# | mysql              |
+# | performance_schema |
+# | sys                |
+# | webdsldb           |
+# +--------------------+
+# 5 rows in set (0.00 sec)
+```
+
+* Your WebDSL Hello World application is now using your local MySQL server to store data
+
 
 # 8. Optional: Dark mode editor
 
