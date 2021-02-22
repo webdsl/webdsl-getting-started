@@ -276,47 +276,42 @@ Note that the WikiText type supports Markdown in the output:
 
 The default configuration of a WebDSL application is to use an H2 database. However, when working on applications for an extended amount of time, we recommend using a MySQL database. The use of MySQL versions above 5.7 is not thoroughly tested, therefore we recommend using a version <= 5.7.
 
-## 7.1 Installing MySQL
-* Download the MySQL installer for 5.7.33 from [dev.mysql.com](https://dev.mysql.com/downloads/windows/installer/5.7.html)
-* If existing MySQL applications are installed, choose to update or skip them until you reach the MySQL Installer window
+# 7.1 Setting up MySQL using Docker
 
-<img src="images/mysql-installer.jpg" width="500" />
-
-* Press the "Add..." button on the right side
-* Under Available Products, select MySQL Servers -> MySQL Servers -> MySQL Server 5.7 -> Top x64 item of the list
-* Press the green arrow to add it to the install list
-* Click "Next" and finish the installation procedure
-* Find your MySQL installation directory. In our case this is `C:\Program Files\MySQL\MySQL Server 5.7`
-* Add `<MySQL installation directory>\bin` to your path:
-  * Open your Windows environment variable settings
-  * Press "Environment Variables"
-  * Select the `Path` variable under "System" and press "Edit"
-  * Press "New"
-  * Type `<MySQL installation directory>\bin` and press enter
-  * Press "OK"
-
-## 7.2 Initializing MySQL
-* Open a command prompt with administrator rights (right click -> Run as Administrator)
-* Execute the following commands.
+* Download [Docker](https://www.docker.com/products/docker-desktop)
+* Start Docker Desktop
+* Make sure Docker is running by executing the following command
 
 ```bash
-mysqld --initialize-insecure
-# this should run for a while and then return without console output
-
-mysqld --install
-# should return: Service successfully installed.
+docker --version
+# should return: Docker version xx.xx.x, build xxxxxxx
 ```
 
-* Open Windows Services by pressing WinKey + R and typing `services.msc` and press enter
-* Scroll down to the MySQL service
+* Create and start a docker container with MySQL version 5.7 by executing the following command:
 
-<img src="images/windows-services.jpg" width="500" />
+```bash
+docker run --name webdsl_mysql -p 3306:3306 -e MYSQL_DATABASE=webdsldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=password -e MYSQL_ALLOW_EMPTY_PASSWORD=true -d mysql:5.7
+# should return:
+# Unable to find image 'mysql:5.7' locally
+# 5.7: Pulling from library/mysql
+# xxxxxxxxxxxx: Pull complete
+# ...
+# xxxxxxxxxxxx: Pull complete
+# Digest: sha256:...
+# Status: Downloaded newer image for mysql:5.7
+# xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-* Right-click the MySQL service
-* Press "Start"
-* Your MySQL database is now running
+docker ps
+# should return:
+# CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                    NAMES
+# ...
+# xxxxxxxxxxxx   mysql:5.7   "docker-entrypoint.s…"   x minutes ago   Up x minutes   0.0.0.0:3306->3306/tcp   webdsl_mysql
+```
 
-# 7.3 Using MySQL in WebDSL applications
+* Your MySQL Docker container is now running.
+  - To stop the container, run `docker stop webdsl_mysql` and to start it again use `docker start webdsl_mysql`
+
+# 7.2 Using MySQL in WebDSL applications
 
 * Open your WebDSL application in the WebDSL editor
 * Open `application.ini` in the root directory of the application
@@ -328,9 +323,9 @@ mysqld --install
   * Remove the `dbfile=...` line
   * Change `dbmode` from `create-drop` to `update`
   * Add the line `dbserver=localhost`
-  * Add the line `dbuser=root`
-  * Add the line `dbpassword=`
-  * Add the line `dbname=helloworld`
+  * Add the line `dbuser=mysql`
+  * Add the line `dbpassword=password`
+  * Add the line `dbname=webdsldb`
 
 <img src="images/application-ini-mysql.jpg"/>
 
@@ -400,6 +395,48 @@ mysql> quit;
 ```
 
 * Your WebDSL Hello World application is now succesfully using your local MySQL server to store data
+
+# 7.3 Optional: Installing MySQL locally
+
+If you prefer installing MySQL locally instead of using a Docker container, follow these steps instead of section 7.1.
+
+* Download the MySQL installer for 5.7.33 from [dev.mysql.com](https://dev.mysql.com/downloads/windows/installer/5.7.html)
+* If existing MySQL applications are installed, choose to update or skip them until you reach the MySQL Installer window
+
+<img src="images/mysql-installer.jpg" width="500" />
+
+* Press the "Add..." button on the right side
+* Under Available Products, select MySQL Servers -> MySQL Servers -> MySQL Server 5.7 -> Top x64 item of the list
+* Press the green arrow to add it to the install list
+* Click "Next" and finish the installation procedure
+* Find your MySQL installation directory. In our case this is `C:\Program Files\MySQL\MySQL Server 5.7`
+* Add `<MySQL installation directory>\bin` to your path:
+  * Open your Windows environment variable settings
+  * Press "Environment Variables"
+  * Select the `Path` variable under "System" and press "Edit"
+  * Press "New"
+  * Type `<MySQL installation directory>\bin` and press enter
+  * Press "OK"
+
+* Open a new command prompt with administrator rights (right click -> Run as Administrator)
+* Execute the following commands.
+
+```bash
+mysqld --initialize-insecure
+# this should run for a while and then return without console output
+
+mysqld --install
+# should return: Service successfully installed.
+```
+
+* Open Windows Services by pressing WinKey + R and typing `services.msc` and press enter
+* Scroll down to the MySQL service
+
+<img src="images/windows-services.jpg" width="500" />
+
+* Right-click the MySQL service
+* Press "Start"
+* Your MySQL database is now running
 
 # 8. Optional: Dark mode editor
 
