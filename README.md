@@ -333,8 +333,8 @@ docker ps
 * Execute the following commands
 
 ```bash
-mysql -u mysql -p
-# should give some basic information about your local server and end with
+docker exec -it webdsl_mysql mysql -u mysql -p
+# should give some basic information about your server and end with
 # ...
 # mysql>
 
@@ -489,12 +489,12 @@ When the terminal where you executed `webdsl run` gives this error, WebDSL canno
   - Execute `webdsl run` again.
 * If your `application.ini` uses a MySQL configuration:
   - Make sure all of the following values are set: `dbserver`, `dbuser`, `dbpassword`, `dbname` and there is no trailing whitespace.
-  - In your terminal, make sure you can connect to your database using the following command: `mysql <dbname> -h localhost -u <dbuser> -p` and enter the password value specified in your `application.ini`
+  - In your terminal, make sure you can connect to your database using the following command: `docker exec -it webdsl_mysql mysql <dbname> -u <dbuser> -p` and enter the password value specified in your `application.ini`
   - 
 
 ## Port 3306 is already in use when attempting to run your docker container
 
 * Remove the original docker container by executing `docker rm webdsl_mysql`. Make sure it is removed correctly by checking it is not in the list produced by `docker ps -a`
 * Execute an altered version of the `docker run` command where the new MySQL port is 3307: `docker run --name webdsl_mysql -p 3307:3306 -e MYSQL_DATABASE=webdsldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=password -e MYSQL_ALLOW_EMPTY_PASSWORD=true -d mysql:5.7`
-* When connection to your database using the terminal, specify the port as follows: `mysql <dbname> -h localhost -P 3307 -u <dbuser> -p` and enter the password value specified in `dbpassword` in your `application.ini`.
+* When connection to your database using the terminal, specify the port (3307) as follows: `docker exec -it webdsl_mysql mysql <dbname> -h localhost -P 3307 -u <dbuser> -p` and enter the password value specified in `dbpassword` in your `application.ini`.
 * change `dbserver=localhost` to `dbserver=localhost:3307` in your `application.ini`.
