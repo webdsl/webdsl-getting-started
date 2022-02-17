@@ -459,6 +459,11 @@ mysql> show databases;
 
 * Your WebDSL Hello World application is now using your local MySQL server to store data
 
+## Local MySQL installation notes
+
+To use the MySQL database for our WebDSL application, we changed the `dbuser` and `dbpassword` in the `application.ini` in 7.2 but these values were based on the Docker command from 7.1. When using a local mysql installation, you might have to adjust the `application.ini` to the correct values:
+  * Change the line `dbuser=mysql` to `dbuser=root`
+  * Change the line `dbpassword=password` to `dbpassword=` (empty)
 
 # 8. Optional: Dark mode editor
 
