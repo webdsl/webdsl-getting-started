@@ -47,8 +47,8 @@ Add `%JAVA_HOME%\bin` to your Path environment variable:
 ```bash
 java -version
 # should return:
-# openjdk version "1.8.0-262"
-# OpenJDK Runtime Environment (build 1.8.0-262-b10)
+# openjdk version "1.8.0-272"
+# OpenJDK Runtime Environment (build 1.8.0-272-b10)
 # OpenJDK 64-Bit Server VM (build 25.71-b10, mixed mode)
 
 javac -version
@@ -204,6 +204,8 @@ With the WebDSL compiler and editor both present, let's start making our first a
 <img src="images/webdsl-project-name.jpg" width="500"/>
 
 * Press "Finish"
+* Open `application.ini` to view all the WebDSL settings for our Hello World application
+* In the `application.ini` change `db=h2` to `db=h2mem` to tell WebDSL to use an in-memory database when we run our Hello World application
 * Open `HelloWorld.app` to view our newly created Hello World application
 
 # 6. Running the WebDSL "Hello World" application
