@@ -170,7 +170,10 @@ webdsl version
 
 In addition to the WebDSL compiler, the WebDSL editor is an eclipse plugin that provides an IDE for WebDSL applications. If you wish to use your existing Eclipse instance, you can install the WebDSL plugin manually from update site `https://webdsl.org/update`. If you do not already have Eclipse installed, or prefer to use a new Eclipse instance as WebDSL editor, follow these instructions. 
 
-* Download `eclipse-windows-x64.zip` from the [build server](https://buildfarm.metaborg.org/view/WebDSL/job/webdsl-eclipsegen/lastSuccessfulBuild/artifact/dist/eclipse/)  (note: there are separate versions for Linux and MacOS)
+* Download `eclipse-[OS name]-x64.zip` from:
+  * [https://update.webdsl.org/eclipse/eclipse-linux-x64.tar.gz](https://update.webdsl.org/eclipse/eclipse-linux-x64.tar.gz)
+  * [https://update.webdsl.org/eclipse/eclipse-macosx-x64.tar.gz](https://update.webdsl.org/eclipse/eclipse-macosx-x64.tar.gz)
+  * [https://update.webdsl.org/eclipse/eclipse-windows-x64.zip](https://update.webdsl.org/eclipse/eclipse-windows-x64.zip)
 
 <img src="images/webdsl-editor-build-server.jpg" width="500"/>
 
