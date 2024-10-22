@@ -106,7 +106,7 @@ ant
 
 Now that all the prerequisites are met, let's install the WebDSL compiler. The compiler is available as command-line tool and transforms your WebDSL applications to running websites.
 
-* Download `webdsl.zip` from the [build server](https://buildfarm.metaborg.org/job/webdsl-compiler/lastSuccessfulBuild/artifact/)
+* Download `webdsl.zip` from [https://update.webdsl.org/compiler/webdsl.zip](https://update.webdsl.org/compiler/webdsl.zip)
 
 <img src="images/webdsl-compiler-build-server.jpg" width="500"/>
 
